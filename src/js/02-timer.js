@@ -46,12 +46,14 @@ function addLeadingZero(value) {
 function handleClick() {
   refs.startbtn.disabled = true;
   const timerId = setInterval(() => {
-    if (pressedDate - currentDate > 0) {
-      formatDate = pressedDate - Date.now();
+    formatDate = pressedDate - Date.now();
+    if (formatDate > 0) {
       refs.daysEl.innerHTML = addLeadingZero(convertMs(formatDate).days);
       refs.hoursEl.innerHTML = addLeadingZero(convertMs(formatDate).hours);
       refs.minutesEl.innerHTML = addLeadingZero(convertMs(formatDate).minutes);
       refs.secondsEl.innerHTML = addLeadingZero(convertMs(formatDate).seconds);
+    } else {
+      clearInterval(timerId);
     }
   }, 1000);
 }
